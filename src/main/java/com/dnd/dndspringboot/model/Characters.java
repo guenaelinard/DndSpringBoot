@@ -1,6 +1,10 @@
-package model;
+package com.dnd.dndspringboot.model;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Characters {
+
 
     private int id;
     private String name;
@@ -51,6 +55,9 @@ public class Characters {
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
+
+    //--------------------------------------- METHODS ---------------------------------------
+
 
     //--------------------------------------- TO STRING ---------------------------------------
 
