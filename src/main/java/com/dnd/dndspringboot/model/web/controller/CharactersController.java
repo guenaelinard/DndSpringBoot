@@ -43,4 +43,10 @@ public class CharactersController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @PutMapping("/Characters/{id}")
+    public void modifyCharacter(@RequestBody Characters character, @PathVariable int id){
+
+        charactersDao.modify(character);
+    }
 }
