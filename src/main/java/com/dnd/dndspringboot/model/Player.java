@@ -1,9 +1,6 @@
 package com.dnd.dndspringboot.model;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class Characters {
+public class Player {
 
 
     private int id;
@@ -12,10 +9,10 @@ public class Characters {
     private int healthPoints;
 
     //--------------------------------------- CONSTRUCTORS ---------------------------------------
-    public Characters(){
+    public Player(){
     }
 
-    public Characters(int id, String name, String type, int healthPoints){
+    public Player(int id, String name, String type, int healthPoints){
         this.id = id;
         this.name = name;
         this.type = type;
