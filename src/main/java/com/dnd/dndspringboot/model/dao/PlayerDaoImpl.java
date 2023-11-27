@@ -42,8 +42,8 @@ public class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public void modify(Player player, int id) {
-        for (Player newplayer : playerList){
-            if (newplayer.getId() == id){
+        for (Player newplayer : playerList) {
+            if (newplayer.getId() == id) {
                 newplayer.setName(player.getName());
                 newplayer.setType(player.getType());
                 newplayer.setHealthPoints(player.getHealthPoints());
@@ -52,7 +52,20 @@ public class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
-    public void delete(int id){
+    public void delete(int id) {
         playerList.removeIf(player -> player.getId() == id);
     }
+
+    public void deleteV2(int id) {
+        playerList.forEach(player -> {
+            if (player.getId() == id) {
+                playerList.remove(player);
+            }
+        });
+    }
+
+
 }
+
+
+

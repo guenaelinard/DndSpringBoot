@@ -1,0 +1,20 @@
+meta {
+  name: Modify Player
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8081/player/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 69,
+    "name": "Toto",
+    "type": "wizard",
+    "healthPoints": 100
+  }
+}

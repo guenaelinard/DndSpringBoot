@@ -1,0 +1,20 @@
+meta {
+  name: Add Player
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8081/player
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id":42,
+    "name": "JB le Magnifique",
+    "type": "Gangsta",
+    "healthPoints": 69
+  }
+}
