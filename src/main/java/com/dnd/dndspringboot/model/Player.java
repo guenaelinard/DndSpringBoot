@@ -2,7 +2,6 @@ package com.dnd.dndspringboot.model;
 
 public class Player {
 
-
     private int id;
     private String name;
     private String type;
