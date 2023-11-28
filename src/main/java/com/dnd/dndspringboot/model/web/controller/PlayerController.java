@@ -14,15 +14,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 public class PlayerController {
 
+    RestTemplate restTemplate;
     private final PlayerDao playerDao;
 
     public PlayerController(PlayerDao playerDao) {
         this.playerDao = playerDao;
+        this.restTemplate = new RestTemplate();
     }
 
     @Operation(summary = "Gets the whole list of players")
@@ -75,5 +78,12 @@ public class PlayerController {
             type = "String",
             example = "1, 2, 3, etc.") int id) {
         playerDao.delete(id);
+    }
+
+    @GetMapping(value = "/random-name")
+    public String getRandomName() {
+        String url = "https://random-word-api.herokuapp.com/word";
+        System.out.println(url);
+        return restTemplate.getForObject(url, String.class);
     }
 }

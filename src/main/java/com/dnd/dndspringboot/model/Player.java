@@ -1,5 +1,10 @@
 package com.dnd.dndspringboot.model;
 
+import com.fasterxml.jackson.annotation.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 public class Player {
 
     private int id;
