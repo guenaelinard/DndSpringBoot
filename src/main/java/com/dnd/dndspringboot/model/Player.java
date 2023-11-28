@@ -3,10 +3,14 @@ package com.dnd.dndspringboot.model;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+@Entity
 public class Player {
 
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String type;

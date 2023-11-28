@@ -1,0 +1,1 @@
+INSERT INTO players VALUES(69,'JB','Wizard',645)

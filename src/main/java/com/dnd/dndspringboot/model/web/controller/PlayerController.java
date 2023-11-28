@@ -34,56 +34,58 @@ public class PlayerController {
         return playerDao.findAll();
     }
 
-    @Operation(summary = "Gets a player by its id")
-    @GetMapping("/player/{id}")
-    public Player showPlayer(@PathVariable @Schema(description = "ID of the given player",
-            name = "id",
-            type = "String",
-            example = "1, 2, 3, etc.") int id) {
-        return playerDao.findById(id);
-    }
 
-    @Operation(summary = "Adds a player to the list of players")
-    @PostMapping("/player")
-    public ResponseEntity<Player> addPlayer(@RequestBody Player character) {
-        Player characterAdded = playerDao.save(character);
-        if (Objects.isNull(characterAdded)) {
-            return ResponseEntity.noContent().build();
-        }
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(characterAdded.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
-    }
 
-    @Operation(summary = "Updates a player by its id")
-    @PutMapping("/player/{id}")
-    public void modifyCharacter(@RequestBody Player player, @PathVariable @Schema(description = "ID of the given player",
-            name = "id",
-            type = "String",
-            example = "1, 2, 3") int id) {
-        playerDao.modify(player, id);
-    }
-
-    @Operation(summary = "Deletes a player by its id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Deleted a player"),
-            @ApiResponse(responseCode = "404", description = "Player not found", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid player id", content = @Content)})
-    @DeleteMapping("/player/{id}")
-    public void deleteCharacter(@PathVariable @Schema(description = "ID of the given player",
-            name = "id",
-            type = "String",
-            example = "1, 2, 3, etc.") int id) {
-        playerDao.delete(id);
-    }
-
-    @GetMapping(value = "/random-name")
-    public String getRandomName() {
-        String url = "https://random-word-api.herokuapp.com/word";
-        System.out.println(url);
-        return restTemplate.getForObject(url, String.class);
-    }
+//    @Operation(summary = "Gets a player by its id")
+//    @GetMapping("/player/{id}")
+//    public Player showPlayer(@PathVariable @Schema(description = "ID of the given player",
+//            name = "id",
+//            type = "String",
+//            example = "1, 2, 3, etc.") int id) {
+//        return playerDao.findById(id);
+//    }
+//
+//    @Operation(summary = "Adds a player to the list of players")
+//    @PostMapping("/player")
+//    public ResponseEntity<Player> addPlayer(@RequestBody Player character) {
+//        Player characterAdded = playerDao.save(character);
+//        if (Objects.isNull(characterAdded)) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        URI location = ServletUriComponentsBuilder
+//                .fromCurrentRequest()
+//                .path("/{id}")
+//                .buildAndExpand(characterAdded.getId())
+//                .toUri();
+//        return ResponseEntity.created(location).build();
+//    }
+//
+//    @Operation(summary = "Updates a player by its id")
+//    @PutMapping("/player/{id}")
+//    public void modifyCharacter(@RequestBody Player player, @PathVariable @Schema(description = "ID of the given player",
+//            name = "id",
+//            type = "String",
+//            example = "1, 2, 3") int id) {
+//        playerDao.modify(player, id);
+//    }
+//
+//    @Operation(summary = "Deletes a player by its id")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Deleted a player"),
+//            @ApiResponse(responseCode = "404", description = "Player not found", content = @Content),
+//            @ApiResponse(responseCode = "400", description = "Invalid player id", content = @Content)})
+//    @DeleteMapping("/player/{id}")
+//    public void deleteCharacter(@PathVariable @Schema(description = "ID of the given player",
+//            name = "id",
+//            type = "String",
+//            example = "1, 2, 3, etc.") int id) {
+//        playerDao.delete(id);
+//    }
+//
+//    @GetMapping(value = "/random-name")
+//    public String getRandomName() {
+//        String url = "https://random-word-api.herokuapp.com/word";
+//        System.out.println(url);
+//        return restTemplate.getForObject(url, String.class);
+//    }
 }
