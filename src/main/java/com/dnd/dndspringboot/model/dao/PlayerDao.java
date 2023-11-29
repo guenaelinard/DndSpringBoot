@@ -1,17 +1,20 @@
 package com.dnd.dndspringboot.model.dao;
 
 import com.dnd.dndspringboot.model.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface PlayerDao {
-    List<Player> findAll();
+@Repository
+public interface PlayerDao extends JpaRepository<Player, Integer> {
+//    List<Player> findAll();
 
     Player findById(int id);
 
-    Player save(Player player);
+//    Player save(Player player);
 
-    void modify(Player player, int id);
+//    void modify(Player player, int id);
 
-    void delete(int id);
+//    void delete(int id);
 }

@@ -29,21 +29,23 @@ public class PlayerController {
     }
 
     @Operation(summary = "Gets the whole list of players")
-    @GetMapping("/player")
+//    @GetMapping("/player")
+    @RequestMapping(value = "/player", method = RequestMethod.GET)
     public List<Player> playerList() {
         return playerDao.findAll();
+
     }
 
 
 
-//    @Operation(summary = "Gets a player by its id")
-//    @GetMapping("/player/{id}")
-//    public Player showPlayer(@PathVariable @Schema(description = "ID of the given player",
-//            name = "id",
-//            type = "String",
-//            example = "1, 2, 3, etc.") int id) {
-//        return playerDao.findById(id);
-//    }
+    @Operation(summary = "Gets a player by its id")
+    @GetMapping("/player/{id}")
+    public Player showPlayer(@PathVariable @Schema(description = "ID of the given player",
+            name = "id",
+            type = "String",
+            example = "1, 2, 3, etc.") int id) {
+        return playerDao.findById(id);
+    }
 //
 //    @Operation(summary = "Adds a player to the list of players")
 //    @PostMapping("/player")
