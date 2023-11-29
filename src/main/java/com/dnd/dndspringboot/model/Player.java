@@ -9,7 +9,7 @@ import org.hibernate.annotations.IdGeneratorType;
 public class Player {
 
     @Id
-//@GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(description = "ID of the given player",
             name = "id",
             type = "String",

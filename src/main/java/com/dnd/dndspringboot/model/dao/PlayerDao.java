@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface PlayerDao extends JpaRepository<Player, Integer> { //Player = Type de classe, Integer = id
 
-//    (T)Player findById(int id);
-//
-//    List<Player> findByHealthPointsGreaterThan(int hpLimit);
+    Player findById(int id);
+
+    List<Player> findByHealthPointsGreaterThan(int hpLimit);
 //
 //    Player save(Player player);
 
