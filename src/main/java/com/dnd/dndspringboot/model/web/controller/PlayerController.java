@@ -4,14 +4,12 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.dnd.dndspringboot.model.dao.PlayerDao;
 import com.dnd.dndspringboot.model.Player;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -43,23 +41,19 @@ public class PlayerController {
 
     @Operation(summary = "Gets a player by its id")
     @GetMapping("/player/{id}")
-    public Player showPlayer(@Valid @PathVariable  int id) {
+    public Player showPlayer(@Valid @PathVariable int id) {
         return playerDao.findById(id);
     }
 
     @GetMapping(value = "player/hp/{hpLimit}")
-    public List<Player> testRequest(@Valid @PathVariable int hpLimit)
-    {
+    public List<Player> testRequest(@Valid @PathVariable int hpLimit) {
         return playerDao.findByHealthPointsGreaterThan(50);
     }
 
     @Operation(summary = "Adds a player to the list of players")
     @PostMapping("/player")
-    public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player character) {
-        Player characterAdded = playerDao.save(character);
-        if (Objects.isNull(characterAdded)) {
-            return ResponseEntity.noContent().build();
-        }
+    public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player player) {
+        Player characterAdded = playerDao.save(player);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -84,13 +78,13 @@ public class PlayerController {
         playerDao.deleteById(id);
     }
 
-//
-//    @GetMapping(value = "/random-name")
-//    public String getRandomName() {
-//        String url = "https://random-word-api.herokuapp.com/word";
-//        System.out.println(url);
-//        return restTemplate.getForObject(url, String.class);
-//    }
+
+    @GetMapping(value = "/random-name")
+    public String getRandomName() {
+        String url = "https://random-word-api.herokuapp.com/word";
+        System.out.println(url);
+        return restTemplate.getForObject(url, String.class);
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
