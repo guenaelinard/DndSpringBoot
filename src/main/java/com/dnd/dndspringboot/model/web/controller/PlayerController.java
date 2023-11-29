@@ -46,6 +46,12 @@ public class PlayerController {
             example = "1, 2, 3, etc.") int id) {
         return playerDao.findById(id);
     }
+
+    @GetMapping(value = "player/hp/{hpLimit}")
+    public List<Player> testRequest(@PathVariable int hpLimit)
+    {
+        return playerDao.findByHealthPointsGreaterThan(50);
+    }
 //
 //    @Operation(summary = "Adds a player to the list of players")
 //    @PostMapping("/player")
