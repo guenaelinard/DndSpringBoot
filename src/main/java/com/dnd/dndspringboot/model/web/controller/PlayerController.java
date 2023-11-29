@@ -1,7 +1,9 @@
 package com.dnd.dndspringboot.model.web.controller;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.dnd.dndspringboot.model.dao.PlayerDao;
@@ -12,7 +14,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,19 +43,19 @@ public class PlayerController {
 
     @Operation(summary = "Gets a player by its id")
     @GetMapping("/player/{id}")
-    public Player showPlayer(@PathVariable  int id) {
+    public Player showPlayer(@Valid @PathVariable  int id) {
         return playerDao.findById(id);
     }
 
     @GetMapping(value = "player/hp/{hpLimit}")
-    public List<Player> testRequest(@PathVariable int hpLimit)
+    public List<Player> testRequest(@Valid @PathVariable int hpLimit)
     {
         return playerDao.findByHealthPointsGreaterThan(50);
     }
 
     @Operation(summary = "Adds a player to the list of players")
     @PostMapping("/player")
-    public ResponseEntity<Player> addPlayer(@RequestBody Player character) {
+    public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player character) {
         Player characterAdded = playerDao.save(character);
         if (Objects.isNull(characterAdded)) {
             return ResponseEntity.noContent().build();
@@ -64,7 +70,7 @@ public class PlayerController {
 
     @Operation(summary = "Updates a player by its id")
     @PutMapping("/player/{id}")
-    public Player modifyCharacter(@RequestBody Player player, @PathVariable int id) {
+    public Player modifyCharacter(@Valid @RequestBody Player player, @PathVariable int id) {
         return playerDao.save(player);
     }
 
@@ -74,7 +80,7 @@ public class PlayerController {
             @ApiResponse(responseCode = "404", description = "Player not found", content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid player id", content = @Content)})
     @DeleteMapping("/player/{id}")
-    public void deleteCharacter(@PathVariable int id) {
+    public void deleteCharacter(@Valid @PathVariable int id) {
         playerDao.deleteById(id);
     }
 
@@ -86,4 +92,16 @@ public class PlayerController {
 //        return restTemplate.getForObject(url, String.class);
 //    }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
 }

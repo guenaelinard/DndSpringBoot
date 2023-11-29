@@ -22,10 +22,9 @@ public class Player {
     @NotBlank(message = "Type is mandatory")
     @Size(min = 3, max = 30, message = "Type must be between 3 and 30 characters")
     private String type;
-    @NotBlank(message = "Health Points is mandatory")
     @Min(value = 0, message = "HPs can't be lower than 0")
     @Max(value = 999, message = "HPs can't be higher than 999")
-    @PositiveOrZero
+    @PositiveOrZero (message = "HPs can't be negative")
     private int healthPoints;
 
     //--------------------------------------- CONSTRUCTORS ---------------------------------------
