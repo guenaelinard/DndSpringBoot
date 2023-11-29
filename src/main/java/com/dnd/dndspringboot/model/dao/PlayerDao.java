@@ -7,16 +7,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlayerDao extends JpaRepository<Player, Integer> {
-//    List<Player> findAll();
+public interface PlayerDao extends JpaRepository<Player, Integer> { //Player = Type de classe, Integer = id
 
-    Player findById(int id);
-
-    List<Player> findByHealthPointsGreaterThan(int hpLimit);
-
+//    (T)Player findById(int id);
+//
+//    List<Player> findByHealthPointsGreaterThan(int hpLimit);
+//
 //    Player save(Player player);
 
-//    void modify(Player player, int id);
 
-//    void delete(int id);
+
+
 }

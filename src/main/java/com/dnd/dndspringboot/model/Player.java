@@ -1,26 +1,29 @@
 package com.dnd.dndspringboot.model;
 
 import com.fasterxml.jackson.annotation.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
+import org.hibernate.annotations.IdGeneratorType;
 
 @Entity
 public class Player {
 
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+//@GeneratedValue(strategy = GenerationType.AUTO)
+    @Schema(description = "ID of the given player",
+            name = "id",
+            type = "String",
+            example = "1, 2, 3, etc.")
     private int id;
     private String name;
     private String type;
     private int healthPoints;
 
     //--------------------------------------- CONSTRUCTORS ---------------------------------------
-    public Player(){
+    public Player() {
     }
 
-    public Player(int id, String name, String type, int healthPoints){
+    public Player(int id, String name, String type, int healthPoints) {
         this.id = id;
         this.name = name;
         this.type = type;
