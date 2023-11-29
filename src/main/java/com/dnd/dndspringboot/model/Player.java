@@ -3,6 +3,7 @@ package com.dnd.dndspringboot.model;
 import com.fasterxml.jackson.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.IdGeneratorType;
 
 @Entity
@@ -15,20 +16,24 @@ public class Player {
             type = "String",
             example = "1, 2, 3, etc.")
     private int id;
+    @NotBlank(message = "Name is mandatory")
+    @Size(min = 3, max = 30, message = "Name must be between 3 and 30 characters")
     private String name;
+    @NotBlank(message = "Type is mandatory")
+    @Size(min = 3, max = 30, message = "Type must be between 3 and 30 characters")
     private String type;
+    @NotBlank(message = "Health Points is mandatory")
+    @Min(value = 0, message = "HPs can't be lower than 0")
+    @Max(value = 999, message = "HPs can't be higher than 999")
+    @PositiveOrZero
     private int healthPoints;
 
     //--------------------------------------- CONSTRUCTORS ---------------------------------------
     public Player() {
     }
 
-    public Player(int id, String name, String type, int healthPoints) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.healthPoints = healthPoints;
-    }
+    //--------------------------------------- METHODS ---------------------------------------
+
 
     //--------------------------------------- GET/SET ---------------------------------------
 
@@ -64,7 +69,6 @@ public class Player {
         this.healthPoints = healthPoints;
     }
 
-    //--------------------------------------- METHODS ---------------------------------------
 
 
     //--------------------------------------- TO STRING ---------------------------------------
