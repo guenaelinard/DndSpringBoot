@@ -12,10 +12,5 @@ public interface PlayerDao extends JpaRepository<Player, Integer> { //Player = T
     Player findById(int id);
 
     List<Player> findByHealthPointsGreaterThan(int hpLimit);
-//
-//    Player save(Player player);
-
-
-
 
 }

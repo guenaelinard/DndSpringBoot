@@ -1,13 +1,7 @@
 package com.dnd.dndspringboot.model.web.controller;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.dnd.dndspringboot.model.dao.PlayerDao;
 import com.dnd.dndspringboot.model.Player;
-
+import com.dnd.dndspringboot.model.dao.PlayerDao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,6 +14,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PlayerController {
@@ -47,7 +46,7 @@ public class PlayerController {
 
     @GetMapping(value = "player/hp/{hpLimit}")
     public List<Player> testRequest(@Valid @PathVariable int hpLimit) {
-        return playerDao.findByHealthPointsGreaterThan(50);
+        return playerDao.findByHealthPointsGreaterThan(hpLimit);
     }
 
     @Operation(summary = "Adds a player to the list of players")
